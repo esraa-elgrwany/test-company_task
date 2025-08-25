@@ -1,0 +1,11 @@
+class DeleteAgazaEntity {
+  final int? status;
+  final String? message;
+  final dynamic data;
+
+  const DeleteAgazaEntity({
+    this.status,
+    this.message,
+    this.data,
+  });
+}
