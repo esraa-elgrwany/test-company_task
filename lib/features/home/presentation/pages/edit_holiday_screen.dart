@@ -22,22 +22,15 @@ class EditHolidayScreen extends StatefulWidget {
 }
 
 class _EditHolidayScreenState extends State<EditHolidayScreen> {
-  final _formKey = GlobalKey<FormState>();
 
-  String? selectedStatusId;
-  VacationEntityData? statusItem;
-
-  final TextEditingController fromDateController = TextEditingController();
-  final TextEditingController toDateController = TextEditingController();
-  final TextEditingController reasonController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    fromDateController.text = widget.args.fromDate ?? "";
-    toDateController.text = widget.args.toDate ?? "";
-    reasonController.text = widget.args.reason ?? "";
-    selectedStatusId = widget.args.holidayTypeId;
+    HomeCubit.get(context).editFromDateController.text = widget.args.fromDate ?? "";
+    HomeCubit.get(context).editToDateController.text = widget.args.toDate ?? "";
+    HomeCubit.get(context).editReasonController.text = widget.args.reason ?? "";
+    HomeCubit.get(context).editSelectedStatusId = widget.args.holidayTypeId;
   }
 
   @override
@@ -56,7 +49,7 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Form(
-                        key: _formKey,
+                        key: HomeCubit.get(context).editFormKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -107,13 +100,13 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                                     final leaveTypes = HomeCubit.get(
                                       context,
                                     ).vacationTypes;
-                                    statusItem = leaveTypes.firstWhere(
-                                      (e) => e.vacationId == selectedStatusId,
+                                    HomeCubit.get(context).editStatusItem = leaveTypes.firstWhere(
+                                      (e) => e.vacationId == HomeCubit.get(context).editSelectedStatusId,
                                     );
                                     return DropdownButtonFormField<
                                       VacationEntityData
                                     >(
-                                      value: statusItem,
+                                      value: HomeCubit.get(context).editStatusItem,
                                       hint: Text(
                                         "Holiday type",
                                         style: Theme.of(context)
@@ -150,8 +143,8 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                                           : null,
                                       onChanged: (value) {
                                         setState(() {
-                                          statusItem = value;
-                                          selectedStatusId =
+                                          HomeCubit.get(context).editStatusItem = value;
+                                          HomeCubit.get(context).editSelectedStatusId =
                                               value?.vacationId ?? "";
                                         });
                                       },
@@ -169,7 +162,7 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                             SizedBox(height: 16.h),
                             DatePickerField(
                               label: "From Date",
-                              controller: fromDateController,
+                              controller: HomeCubit.get(context).editFromDateController,
                             ),
                             SizedBox(height: 24.h),
                             Text(
@@ -179,11 +172,11 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                             SizedBox(height: 16.h),
                             DatePickerField(
                               label: "To Date",
-                              controller: toDateController,
+                              controller: HomeCubit.get(context).editToDateController,
                               onDateSelected: (date) {
-                                if (fromDateController.text.isNotEmpty) {
+                                if (HomeCubit.get(context).editFromDateController.text.isNotEmpty) {
                                   final from = DateTime.parse(
-                                    fromDateController.text,
+                                    HomeCubit.get(context).editFromDateController.text,
                                   );
                                   if (date.isBefore(from)) {
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -193,7 +186,7 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                                         ),
                                       ),
                                     );
-                                    toDateController.clear();
+                                    HomeCubit.get(context).editToDateController.clear();
                                   }
                                 }
                               },
@@ -201,7 +194,7 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                             SizedBox(height: 24.h),
                             TextFormItem(
                               label: "Reason",
-                              controller: reasonController,
+                              controller: HomeCubit.get(context).editReasonController,
                               hint: "Reason",
                             ),
                             SizedBox(height: 24.h),
@@ -250,8 +243,8 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                               child: AddButton(
                                 text: "Edit",
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    if (selectedStatusId == null) {
+                                  if (HomeCubit.get(context).editFormKey.currentState!.validate()) {
+                                    if (HomeCubit.get(context).editSelectedStatusId == null) {
                                       ScaffoldMessenger.of(
                                         context,
                                       ).showSnackBar(
@@ -263,11 +256,11 @@ class _EditHolidayScreenState extends State<EditHolidayScreen> {
                                     }
                                     HomeCubit.get(context).editAgaza(
                                       id: widget.args.id,
-                                      statusId: selectedStatusId ?? "0",
-                                      fromDate: fromDateController.text,
-                                      toDate: toDateController.text,
-                                      reason: reasonController.text.isNotEmpty
-                                          ? reasonController.text
+                                      statusId: HomeCubit.get(context).editSelectedStatusId ?? "0",
+                                      fromDate: HomeCubit.get(context).editFromDateController.text,
+                                      toDate: HomeCubit.get(context).editToDateController.text,
+                                      reason: HomeCubit.get(context).editReasonController.text.isNotEmpty
+                                          ? HomeCubit.get(context).editReasonController.text
                                           : null,
                                     );
                                   }

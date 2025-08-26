@@ -49,6 +49,16 @@ class HomeCubit extends Cubit<HomeState> {
   final TextEditingController reasonController = TextEditingController();
   File? pickedFile;
 
+
+  final editFormKey = GlobalKey<FormState>();
+
+  String? editSelectedStatusId;
+  VacationEntityData? editStatusItem;
+
+  final TextEditingController editFromDateController = TextEditingController();
+  final TextEditingController editToDateController = TextEditingController();
+  final TextEditingController editReasonController = TextEditingController();
+
   TextEditingController searchController = TextEditingController();
   static HomeCubit get(context) => BlocProvider.of(context);
 

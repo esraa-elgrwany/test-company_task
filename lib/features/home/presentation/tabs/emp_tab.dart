@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/features/home/presentation/manager/home_cubit.dart';
 import 'package:task/features/home/presentation/widgets/employee_card.dart';
-import 'package:task/features/home/presentation/widgets/holiday_card.dart';
 import 'package:task/features/home/presentation/widgets/search_bar.dart';
 
 class EmpTab extends StatefulWidget{
