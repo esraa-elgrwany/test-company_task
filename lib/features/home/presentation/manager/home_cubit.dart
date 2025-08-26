@@ -38,6 +38,17 @@ class HomeCubit extends Cubit<HomeState> {
   File? signatureFile;
   String selectedStatus = "gari";
   final List<String> statusList = const ["gari","wared", "accepted", "refused"];
+
+  final formKey = GlobalKey<FormState>();
+
+  String? selectedType;
+  String? selectedStatusId;
+  VacationEntityData? statusItem;
+  final TextEditingController fromDateController = TextEditingController();
+  final TextEditingController toDateController = TextEditingController();
+  final TextEditingController reasonController = TextEditingController();
+  File? pickedFile;
+
   TextEditingController searchController = TextEditingController();
   static HomeCubit get(context) => BlocProvider.of(context);
 
@@ -205,5 +216,6 @@ class HomeCubit extends Cubit<HomeState> {
       emit(GetEmployeeSuccess(r));
     });
   }
+
 }
 

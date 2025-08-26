@@ -40,7 +40,7 @@ class EmployeeCard extends StatelessWidget {
                 width: 80.w,
                 height: 80.h,
                 errorBuilder: (context, error, stackTrace) =>
-                    Icon(Icons.error_outline, size: 40.sp,),),
+                    Icon(Icons.image_not_supported, size: 40.sp,),),
             ),
             SizedBox(width: 12.w),
             Expanded(
