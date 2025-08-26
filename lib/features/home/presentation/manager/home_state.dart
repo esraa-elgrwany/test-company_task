@@ -60,3 +60,39 @@ class AddAgazaFailure extends HomeState{
   Failures failure;
   AddAgazaFailure(this.failure);
 }
+
+// edit agaza
+class EditAgazaLoading extends HomeState {}
+class EditAgazaSuccess extends HomeState{
+  EditAgazaEntity model;
+  EditAgazaSuccess(this.model);
+}
+
+class EditAgazaFailure extends HomeState{
+  Failures failure;
+  EditAgazaFailure(this.failure);
+}
+
+// delete agaza
+class DeleteAgazaLoading extends HomeState {}
+class DeleteAgazaSuccess extends HomeState{
+  DeleteAgazaEntity model;
+  DeleteAgazaSuccess(this.model);
+}
+
+class DeleteAgazaFailure extends HomeState{
+  Failures failure;
+  DeleteAgazaFailure(this.failure);
+}
+
+//get employee
+class GetEmployeeLoading extends HomeState {}
+class GetEmployeeSuccess extends HomeState{
+  EmployeeEntity model;
+  GetEmployeeSuccess(this.model);
+}
+
+class GetEmployeeFailure extends HomeState{
+  Failures failure;
+  GetEmployeeFailure(this.failure);
+}

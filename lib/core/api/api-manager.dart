@@ -10,8 +10,6 @@ class ApiManager {
       "Accept": "*/*",
       "Content-Type": "multipart/form-data",
     };
-    dio.options.connectTimeout = const Duration(seconds: 30);
-    dio.options.receiveTimeout = const Duration(seconds: 30);
   }
 
   Options _options({Map<String, dynamic>? extraHeaders}) {

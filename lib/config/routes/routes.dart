@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:task/features/code/presentation/pages/code_screen.dart';
 import 'package:task/features/home/domain/entities/get_holiday_entity.dart';
 import 'package:task/features/home/presentation/pages/add_holiday_screen.dart';
+import 'package:task/features/home/presentation/pages/edit_holiday_screen.dart';
 import 'package:task/features/home/presentation/pages/holiday_details_screen.dart';
 import 'package:task/features/home/presentation/pages/home_screen.dart';
 import 'package:task/features/home/presentation/pages/signature_screen.dart';
@@ -17,6 +18,7 @@ class RoutesName {
   static const String signature = "signature";
   static const String holidayDetails = "holidayDetails";
   static const String addHoliday = "addHoliday";
+  static const String editHoliday = "editHoliday";
 }
 
 class AppRouter {
@@ -47,6 +49,12 @@ class AppRouter {
       case RoutesName.addHoliday:
         return MaterialPageRoute(
           builder: (context) => AddHolidayScreen(),
+        );
+      case RoutesName.editHoliday:
+        HolidayEntityData data =
+        settings.arguments as HolidayEntityData;
+        return MaterialPageRoute(
+          builder: (context) => EditHolidayScreen(args: data,),
         );
         default:
           return MaterialPageRoute(

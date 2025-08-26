@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/features/home/presentation/manager/home_cubit.dart';
+import 'package:task/features/home/presentation/widgets/employee_card.dart';
 import 'package:task/features/home/presentation/widgets/holiday_card.dart';
+import 'package:task/features/home/presentation/widgets/search_bar.dart';
 
 class EmpTab extends StatefulWidget{
   const EmpTab({super.key});
@@ -13,7 +15,7 @@ class EmpTab extends StatefulWidget{
 class _EmpTabState extends State<EmpTab> {
   @override
   void initState() {
-    context.read<HomeCubit>().getAgazaList();
+    context.read<HomeCubit>().getEmployee();
     super.initState();
   }
 
@@ -23,9 +25,27 @@ class _EmpTabState extends State<EmpTab> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
+          SearchBarWidget(
+            controller:HomeCubit.get(context).searchController,
+            onSearch: (query) {
+              if (HomeCubit.get(context).searchController.text.isNotEmpty) {
+                context.read<HomeCubit>().getEmployee(
+                  search: HomeCubit.get(context).searchController.text
+                );
+              }else {
+                context.read<HomeCubit>().getEmployee();
+              }
+            },
+            onClear: () {
+              setState(() {
+                HomeCubit.get(context).searchController.clear();
+                context.read<HomeCubit>().getEmployee();
+              });
+            },
+          ),
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
-              if (state is AgazaListLoading) {
+              if (state is GetEmployeeLoading) {
                 return Center(
                   child: CircularProgressIndicator(color: Colors.green),
                 );
@@ -47,9 +67,9 @@ class _EmpTabState extends State<EmpTab> {
                     ],
                   ),
                 );
-              } else if (state is AgazaListSuccess) {
-                final agazaList = context.read<HomeCubit>().agazaList;
-                if (agazaList.isEmpty) {
+              } else if (state is GetEmployeeSuccess) {
+                final employeeList = context.read<HomeCubit>().employeeList;
+                if (employeeList.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +77,7 @@ class _EmpTabState extends State<EmpTab> {
                         Icon(Icons.calendar_month_rounded, color: Colors.grey, size: 50),
                         SizedBox(height: 12),
                         Text(
-                          "No Holidays Found",
+                          "No Employee Found",
                           style: TextStyle(fontSize: 18, color: Colors.grey),
                         ),
                       ],
@@ -66,18 +86,9 @@ class _EmpTabState extends State<EmpTab> {
                 }
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: agazaList.length,
+                    itemCount: employeeList.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          /*Navigator.pushNamed(
-                            context,
-                            CourseDetailsScreen.routeName,
-                            arguments: courses[index],
-                          );*/
-                        },
-                        child: HolidayCard(index: index),
-                      );
+                      return EmployeeCard(index: index);
                     },
                   ),
                 );
