@@ -5,7 +5,7 @@ class StatusCodeHandler {
     switch (statusCode) {
       case 200:
       case 201:
-        return ServerFailure("Success"); // Not really an error, but you can handle differently
+        return ServerFailure("Success");
 
       case 400:
         return ServerFailure("Bad Request: ${_extractMessage(data)}");

@@ -38,13 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Theme
                   .of(context)
                   .colorScheme
-                  .secondary,
+                  .primary,
               borderRadius: BorderRadius.all(Radius.circular(36.r)),
             ),
             child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(36.r)),
                 child: BottomNavigationBar(
-                  elevation: 2,
+
+                  backgroundColor: Colors.transparent, // ✅ important
+                  elevation: 0,
                   onTap: (value) {
                     index = value;
                     setState(() {});

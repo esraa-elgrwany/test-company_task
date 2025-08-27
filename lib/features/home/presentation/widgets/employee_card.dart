@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/core/utils/app_colors.dart';
 import 'package:task/features/home/presentation/manager/home_cubit.dart';
 class EmployeeCard extends StatelessWidget {
  final int index;
@@ -40,7 +41,7 @@ class EmployeeCard extends StatelessWidget {
                 width: 80.w,
                 height: 80.h,
                 errorBuilder: (context, error, stackTrace) =>
-                    Icon(Icons.image_not_supported, size: 40.sp,),),
+                    Icon(Icons.image_not_supported, size: 40.sp,color: AppColors.primaryColor,),),
             ),
             SizedBox(width: 12.w),
             Expanded(

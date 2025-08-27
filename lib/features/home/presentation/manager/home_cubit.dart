@@ -39,27 +39,8 @@ class HomeCubit extends Cubit<HomeState> {
   String selectedStatus = "gari";
   final List<String> statusList = const ["gari","wared", "accepted", "refused"];
 
-  final formKey = GlobalKey<FormState>();
-
-  String? selectedType;
-  String? selectedStatusId;
-  VacationEntityData? statusItem;
-  final TextEditingController fromDateController = TextEditingController();
-  final TextEditingController toDateController = TextEditingController();
-  final TextEditingController reasonController = TextEditingController();
-  File? pickedFile;
-
-
-  final editFormKey = GlobalKey<FormState>();
-
-  String? editSelectedStatusId;
-  VacationEntityData? editStatusItem;
-
-  final TextEditingController editFromDateController = TextEditingController();
-  final TextEditingController editToDateController = TextEditingController();
-  final TextEditingController editReasonController = TextEditingController();
-
   TextEditingController searchController = TextEditingController();
+
   static HomeCubit get(context) => BlocProvider.of(context);
 
   Future<void> addSignature() async {
@@ -153,6 +134,7 @@ class HomeCubit extends Cubit<HomeState> {
           (l) => emit(AddAgazaFailure(l)),
           (r) {
         emit(AddAgazaSuccess(r));
+        getAgazaList();
         print("Add Agaza cubit+++++ ${r.data}");
       },
     );
@@ -183,6 +165,7 @@ class HomeCubit extends Cubit<HomeState> {
           (l) => emit(EditAgazaFailure(l)),
           (r) {
         emit(EditAgazaSuccess(r));
+        getAgazaList();
         print("Edit Agaza cubit+++++ ${r.data}");
       },
     );

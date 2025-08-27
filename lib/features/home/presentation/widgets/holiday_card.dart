@@ -176,9 +176,15 @@ class HolidayCard extends StatelessWidget {
 ),
                 Spacer(),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.editHoliday,
-                      arguments: agaza[index],);
+                  onTap: () async{
+                    final result = await Navigator.pushNamed(
+                      context,
+                      RoutesName.editHoliday,
+                      arguments: agaza[index]
+                    );
+                    if (result == true) {
+                      context.read<HomeCubit>().getAgazaList();
+                    }
                   },
                     child: Icon(Icons.edit,color: Colors.blue,size: 24.sp)),
               ],

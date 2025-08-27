@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task/core/utils/app_colors.dart';
 
 class AddButton extends StatelessWidget {
   final String text;
@@ -21,7 +22,7 @@ class AddButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: isDisabled
               ? Colors.grey.shade400
-              : Theme.of(context).primaryColor,
+              :AppColors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

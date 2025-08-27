@@ -104,8 +104,15 @@ class _HolidayTabState extends State<HolidayTab> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: InkWell(
-              onTap: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => AddHolidayScreen(),));
+              onTap: () async{
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AddHolidayScreen()),
+                );
+
+                if (result == true) {
+                  context.read<HomeCubit>().getAgazaList();
+                }
               },
               child: CircleAvatar(
                 radius: 32.r,

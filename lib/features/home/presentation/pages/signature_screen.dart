@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
+import 'package:task/config/routes/routes.dart';
 import 'package:task/features/home/presentation/pages/home_screen.dart';
 import 'package:task/features/login/presentation/widgets/failure_dialog.dart';
 import 'package:task/features/login/presentation/widgets/loading_widget.dart';
@@ -80,7 +81,8 @@ class _SignatureScreenState extends State<SignatureScreen> {
                 ),
               ),
             );
-            Navigator.pushReplacement(context,MaterialPageRoute(builder:(context) => HomeScreen(),));
+
+            Navigator.pushNamed(context, RoutesName.home);
           }
         },
         builder: (context, state) {
@@ -108,6 +110,13 @@ class _SignatureScreenState extends State<SignatureScreen> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () => _saveSignature(context),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Theme.of(context).colorScheme.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // optional
+                              ),
                               child: Text(
                                 "Save",
                                 style: Theme.of(context)
@@ -121,6 +130,13 @@ class _SignatureScreenState extends State<SignatureScreen> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () => _controller.clear(),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Theme.of(context).colorScheme.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // optional
+                              ),
                               child: Text(
                                 "Clear",
                                 style: Theme.of(context)

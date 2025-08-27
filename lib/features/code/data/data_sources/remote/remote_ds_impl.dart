@@ -33,18 +33,17 @@ class RemoteDsImpl implements RemoteDs {
       debugPrint('[RemoteDs] status=${response.statusCode} data=${response.data}');
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> json = response.data as Map<String, dynamic>;
-
-        if (json["status"] == 200) {
-          final model = CompanyCodeModel.fromJson(json);
-          final companyData = model.data as CompanyDataModel?;
+        CompanyCodeModel model = CompanyCodeModel.fromJson(response.data);
+        if (model.status == 200) {
+          final companyData = model.data as CompanyDataModel;
           if (companyData != null) {
             await CompanyManager().saveCompany(companyData);
+            CompanyManager().company;
           }
 
           return Right(model);
         } else {
-          return Left(ServerFailure(json["message"]?.toString() ?? "Unknown error"));
+          return Left(ServerFailure(model.message?.toString() ?? "Unknown error"));
         }
       }
 

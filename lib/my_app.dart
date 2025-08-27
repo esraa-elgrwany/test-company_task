@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/config/routes/routes.dart' show AppRouter;
+import 'package:task/config/theming/my_theme.dart';
 
-import 'config/routes/routes.dart';
-import 'config/theming/my_theme.dart';
 
 class MyApp extends StatelessWidget {
   String start;

@@ -34,7 +34,7 @@ class CompanyManager {
 
 
   Color get primaryColor {
-    final hex = company?.color ?? "#2196F3";
+    final hex = company?.color ?? "";
     return _hexToColor(hex);
   }
 
@@ -46,12 +46,19 @@ class CompanyManager {
     return company?.name ?? "no name";
   }
 
-  Color _hexToColor(String hex) {
+  Color _hexToColor(String? hex) {
+    if (hex == null || hex.isEmpty) {
+      return Colors.blue;
+    }
     hex = hex.replaceFirst("#", "");
     if (hex.length == 6) {
-      hex = "FF$hex"; // add alpha if missing
+      hex = "FF$hex";
     }
-    return Color(int.parse(hex, radix: 16));
+    try {
+      return Color(int.parse(hex, radix: 16));
+    } catch (_) {
+      return Colors.blue;
+    }
   }
 
   Future<void> clearCompany() async {

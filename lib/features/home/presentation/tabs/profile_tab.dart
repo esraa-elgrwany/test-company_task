@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task/core/helper/company_manager/company_manager.dart';
 import 'package:task/core/helper/user_manager/user_manager.dart';
+import 'package:task/core/utils/app_colors.dart';
 import 'package:task/features/home/presentation/manager/home_cubit.dart';
 import 'package:task/features/home/presentation/pages/signature_screen.dart';
 import 'package:task/features/home/presentation/widgets/profile_detail_tile.dart';
@@ -93,16 +94,22 @@ class ProfileTab extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const SignatureScreen(),
-                      ),
+                      MaterialPageRoute(builder: (_) => SignatureScreen()),
                     );
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12), // optional
+                  ),
                   child: Text(
                     "Add Signature",
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall!.copyWith(color: Colors.white),
+
                   ),
                 ),
               ],

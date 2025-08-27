@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:task/core/helper/company_manager/company_manager.dart';
 import 'package:task/core/utils/constants.dart';
 
 class ApiManager {
   final Dio dio;
 
   ApiManager({Dio? dioInstance}) : dio = dioInstance ?? Dio() {
-    dio.options.baseUrl = Constants.baseUrl;
     dio.options.headers = {
       "Accept": "*/*",
       "Content-Type": "multipart/form-data",
@@ -21,6 +21,7 @@ class ApiManager {
       },
     );
   }
+  String get _baseUrl => CompanyManager().baseUrl;
 
   Future<Response> getData(
     String endPoint, {
@@ -28,7 +29,7 @@ class ApiManager {
   }) async {
     try {
       return await dio.get(
-        endPoint,
+        _baseUrl +endPoint,
         queryParameters: queryParameters,
         options: _options(),
       );
@@ -44,7 +45,7 @@ class ApiManager {
   }) async {
     try {
       return await dio.post(
-        endPoint,
+        _baseUrl +endPoint,
         data: body,
         options: _options(extraHeaders: extraHeaders),
       );

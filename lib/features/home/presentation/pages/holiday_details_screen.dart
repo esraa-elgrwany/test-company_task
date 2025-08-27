@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/core/utils/constants.dart';
 import 'package:task/features/home/domain/entities/get_holiday_entity.dart';
 import 'package:task/features/home/presentation/widgets/holiday_details_row.dart';
 
@@ -10,7 +11,8 @@ class HolidayDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   //late  HolidayEntityData args = ModalRoute.of(context)!.settings.arguments as HolidayEntityData;
+    String baseUrl = "https://mydomain.com/";
+    //late  HolidayEntityData args = ModalRoute.of(context)!.settings.arguments as HolidayEntityData;
     return Scaffold(
       appBar: AppBar(
         title: Text("تفاصيل الأجازة"),
@@ -24,10 +26,10 @@ class HolidayDetailsScreen extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
                 child: Image.network(
-                  args.attachment,
+                 "${Constants.baseUrl}${args.attachment}",
                   height: 150.h,
                   width: double.infinity,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   errorBuilder: (_, __, ___) => Container(
                     height: 150.h,
                     width: 320.w,

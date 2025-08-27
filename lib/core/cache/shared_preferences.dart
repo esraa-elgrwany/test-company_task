@@ -27,7 +27,9 @@ class CacheData {
   }
 
   static dynamic getData({required String key}) {
-    return preferences.get(key);
+    var value = preferences.get(key);
+    print("Retrieved $key: $value");
+    return value;
   }
 
   static Future<bool> removeData(String key) async {
