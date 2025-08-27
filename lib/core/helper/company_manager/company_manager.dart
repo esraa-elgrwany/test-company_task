@@ -46,20 +46,25 @@ class CompanyManager {
     return company?.name ?? "no name";
   }
 
+
   Color _hexToColor(String? hex) {
     if (hex == null || hex.isEmpty) {
       return Colors.blue;
     }
     hex = hex.replaceFirst("#", "");
     if (hex.length == 6) {
-      hex = "FF$hex";
+      hex = "FF$hex"; // add alpha
     }
     try {
-      return Color(int.parse(hex, radix: 16));
-    } catch (_) {
+      return Color(int.parse(hex, radix: 16)); // <-- FIX: remove "0x"
+    } catch (e) {
+      debugPrint("Color parse error: $e for hex=$hex");
       return Colors.blue;
     }
   }
+
+
+
 
   Future<void> clearCompany() async {
     _company = null;

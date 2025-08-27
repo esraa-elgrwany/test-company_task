@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/core/helper/company_manager/company_manager.dart';
 import 'package:task/core/utils/app_strings.dart';
 import 'package:task/features/code/presentation/manager/company_code_cubit.dart';
 import 'package:task/features/code/presentation/widgets/button_widget.dart';
@@ -8,6 +9,7 @@ import 'package:task/features/code/presentation/widgets/text_form_widget.dart';
 import 'package:task/features/login/presentation/pages/login_screen.dart';
 import 'package:task/features/login/presentation/widgets/failure_dialog.dart';
 import 'package:task/features/login/presentation/widgets/loading_widget.dart';
+import 'package:task/features/theme/presentation/manager/theme_cubit.dart';
 
 class CodeScreen extends StatefulWidget {
   const CodeScreen({super.key});
@@ -81,6 +83,9 @@ class _CodeScreenState extends State<CodeScreen> {
                                       horizontal: 4,
                                     ),
                                   ),
+                                );
+                                context.read<ThemeCubit>().updatePrimaryColor(
+                                 CompanyManager().primaryColor
                                 );
                                 Navigator.push(
                                   context,
